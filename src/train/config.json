@@ -1,0 +1,56 @@
+{
+    "project_name": "Document Intelligence",
+    "dataset": {
+        "split": {
+            "train": 0.8,
+            "val": 0.2
+        }
+    },
+    "wandb": {
+        "project": "Document Intelligence",
+        "name": "doc_intel",
+        "save_dir": "wandb"
+    },
+    "callbacks": {
+        "early_stopping": {
+            "monitor": "val_edit_distance",
+            "patience": 3,
+            "verbose": false,
+            "mode": "min"
+        },
+        "push_to_hub": {
+            "save_model_path": "saved_models"
+        }
+    },
+    "model": {
+        "image_size": [
+            1100,
+            1420
+        ],
+        "max_length": 1536,
+        "task_prompt": "<doc_intel>"
+    },
+    "training": {
+        "max_epochs": 20,
+        "num_sanity_val_steps": 0,
+        "val_check_interval": 1.0,
+        "check_val_every_n_epoch": 2,
+        "accelerator": "gpu",
+        "devices": 1,
+        "precision": "16-mixed",
+        "gradient_clip_val": 1.0,
+        "num_training_samples_per_epoch": 480,
+        "lr": 0.0002,
+        "train_batch_sizes": [
+            1
+        ],
+        "val_batch_sizes": [
+            1
+        ],
+        "seed": 2022,
+        "num_nodes": 1,
+        "warmup_steps": 200,
+        "result_path": "./result",
+        "verbose": true
+    }
+}
